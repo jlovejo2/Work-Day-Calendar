@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Work Day Scheduler</title>
+</head>
+
+<body>
+  <header class="jumbotron">
+    <h1 class="display-3">Work Day Scheduler</h1>
+    <p class="lead">A simple calendar app for scheduling your work day</p>
+    <p id="currentDay" class="lead"></p>
+  </header>
+  <div id="calendarArea" class="container-fluid">
+    <!-- Timeblocks go here -->
+    <div class="col-lg-1 col-md-2"></div>
+    <div class="col-lg-10 col-md-10">
+      <!-- nine to ten -->
+      <div class="row d-flex justify-content-center min-h-10">
+        <div class="col-lg-1">
+        </div>
+        <div   class="col-lg-10 col-md-12 col-sm-12">
+            <textarea class="form-control" id="nineToTen" rows="3" placeholder="Write hourly Events here..."></textarea>
+        </div>
+        <div class="col-lg-1 align-self-center">
+          <button id="nineToTenButton" type="button" class="saveBtn p-3">save</button>
+        </div>
+      </div>
+      <!-- Ten to Eleven -->
+      <div class="row d-flex justify-content-center min-h-10">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12">
+              <textarea class="form-control" id="tenToEleven" rows="3" placeholder="Write hourly Events here..."></textarea>
+          </div>
+          <div class="col-lg-1 align-self-center">
+          <button id="tenToElevenButton" type="button" class="saveBtn p-3">save</button>
+          </div>
+        </div>
+      <!-- Eleven to Twelve -->
+      <div class="row d-flex justify-content-center min-h-10">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12">
+              <textarea class="form-control" id="eleventoTwelve" rows="3" placeholder="Write hourly Events here..."></textarea>
+          </div>
+          <div class="col-lg-1 align-self-center">
+            <button id="elevenToTwelveButton" type="button" class="btn btn-primary btn-sm">save</button>
+          </div>
+      </div>
+      <!-- Twelve to One -->
+      <div class="row d-flex justify-content-center min-h-10">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12">
+              <textarea class="form-control" id="twelveToOne" rows="3" placeholder="Write hourly Events here..."></textarea>
+          </div>
+          <div class="col-lg-1 align-self-center">
+            <button id="twelveToOneButton" type="button" class="btn btn-primary btn-sm">save</button>
+          </div>
+      </div>
+      <!-- One to Two -->
+      <div class="row d-flex justify-content-center min-h-10">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12">
+              <textarea class="form-control" id="oneToTwo" rows="3" placeholder="Write hourly Events here..."></textarea>
+          </div>
+          <div class="col-lg-1 align-self-center">
+            <button id="oneToTwoButton" type="button" class="btn btn-primary btn-sm">save</button>
+          </div>
+      </div>
+      <!-- Two to Three -->
+      <div class="row d-flex justify-content-center min-h-10">
+          <div class="col-lg-1">
+          </div>
+          <div class="textarea col-lg-10 col-md-12 col-sm-12">
+              <textarea class="form-control" id="twoToThree" rows="3" placeholder="Write hourly Events here..."></textarea>
+          </div>
+          <div class="col-lg-1 align-self-center">
+            <button id="twoToThreeButton" type="button" class="btn btn-primary btn-sm">save</button>
+        </div>
+      </div>
+      <!-- Three to Four -->
+      <div class="row d-flex justify-content-center min-h-10">
+          <div class="col-lg-1">
+          </div>
+          <div   class="col-lg-10 col-md-12 col-sm-12">
+              <textarea class="form-control" id="threeToFour" rows="3" placeholder="Write hourly Events here..."></textarea>
+          </div>
+          <div class="col-lg-1 align-self-center">
+            <button id="threeToFourButton" type="button" class="btn btn-primary btn-sm">save</button>
+          </div>
+      </div>
+      <!-- Four to Five -->
+      <div class="row d-flex justify-content-center min-h-10">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12">
+              <textarea class="form-control" id="fourToFive" rows="3" placeholder="Write hourly Events here..."></textarea>
+          </div>
+          <div class="col-lg-1 align-self-center">
+            <button id="fourToFiveButton" type="button" class="btn btn-primary btn-sm">save</button>
+          </div>
+      </div>
+      <div class="row"></div>
+    </div>
+    <div class="col-lg-1 col-md-2"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="javascript/javascript.js"></script>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ var workCalendar = $("#calendarArea");
     // var nineToTenBtn = $("#nineToTenButton");
 var workDayEvents = {};
 
+init();
     //Make the current date and time viewable at the top of the page in currentDay div.
     dateLocation.text(moment().format('LLLL'));
     console.log("test_outside_all_functions");
@@ -82,20 +83,43 @@ var workDayEvents = {};
     // Parsing the JSON string to an object
     var storedEvents = JSON.parse(localStorage.getItem("workDayEvents"));
 
-    // If scores were retrieved from localStorage, update the scores array to it
+    // If events were retrieved from localStorage, set the storedEvents equal to workDayEvents.
     if (storedEvents !== null) {
         workDayEvents = storedEvents;
     }
 
-    // // Render scores to the DOM
-    // renderEvents();
-}
+    // Render events to the DOM
+    // below line of code runs the function for every element of the object workDayEvents
+    $.each(workDayEvents, function (key, value) {
+    //below if statments search the object element for the keyname and if it is equal to the designated string it sets 
+    //the associated elements content equal to the value associated with that keyname.  
+      if (key === "nineToTen" ) {
+        $("#nineToTen").text(value);
+      } else if (key === "tenToEleven" ) {
+        $("#tenToEleven").text(value);
+      } else if (key === "elevenToTwelve" ) {
+        $("#elevenToTwelve").text(value);
+      } else if (key === "twelveToOne" ) {
+        $("#twelveToOne").text(value);
+      } else if (key === "oneToTwo" ) {
+        $("#oneToTwo").text(value);
+      } else if (key === "twoToThree" ) {
+        $("#twoToThree").text(value);
+      } else if (key === "threeToFour" ) {
+        $("#threeToFour").text(value);
+      } else if (key === "fourToFive" ) {
+        $("#fourToFive").text(value);
+      }
+    });
+  
+  };
 
-// //This function renders the highscores to the html page.
-// function renderEvents() {
+
+// //This function renders the events to the html page.
+// function renderEvents(key, value) {
 //     // Clear highScoreList element and update highScoreCount
-
-//     for (i of workDayEvents) {
+//     var key = 
+    
 
 //     };
 
@@ -108,5 +132,5 @@ var workDayEvents = {};
 //         li.setAttribute("data-index", i);
 //         highScoreList.appendChild(li);
 //     }
-// }
+//  }
   

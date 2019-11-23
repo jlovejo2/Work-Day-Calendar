@@ -2,17 +2,15 @@ var dateLocation = $("#currentDay");
 var workCalendar = $("#calendarArea");
 var jumbo = $(".jumbotron");
 var timeFormat = parseInt(moment().format("HH"));
-
-// var nineToTen = $("#nineToTen");
-// var tenToEleven = $("#tenToEleven");
-// var eleventoTwelve = $("#elevenToTwelve");
-// var twelveToOne = $("#twelvetoOne");
-// var oneToTwo = $("#onetoTwo");
-// var twoToThree = $("#twotoThree");
-// var threeToFour = $("#threetoFour");
-// var fourToFive = $("#fourtoFive");
-// var nineToTenBtn = $("#nineToTenButton");
 var workDayEvents = {};
+
+//Variable used to create clear button
+var but = $("<button>");
+
+//Variables for creating my color coding key
+var keyTitle = $("<h3>");
+var keyRow = $("<div>").addClass("row m-3");
+var keyArr = ["past", "present", "future"];
 
 // Call init function.  this function will render anything from localstorage to the DOM
 init();
@@ -26,6 +24,7 @@ createHourDivs("1 PM", "#oneToTwo");
 createHourDivs("2 PM", "#twoToThree");
 createHourDivs("3 PM", "#threeToFour");
 createHourDivs("4 PM", "#fourToFive");
+createHourDivs("5 PM", "#fiveToSix");
 
 $(document).ready(function () {
 
@@ -33,10 +32,23 @@ $(document).ready(function () {
   dateLocation.text(moment().format('LLLL'));
 
   //Create Clear Events Button
-  var but = $("<button>");
   but.text("Clear Events");
   jumbo.append(but);
-  but.addClass("btn btn-primary btm-sm");
+  but.addClass("btn btn-warning btm-sm");
+
+  //create keyDiv displaying color coding key 
+  keyTitle.text("Color Coding Key");
+  keyTitle.addClass("m-3");
+  jumbo.append(keyTitle.append(keyRow));
+
+  //For loop that runs through the classes used in my color coding key.  Classes are kept in keyArr.
+  for (i = 0; i < keyArr.length; i++) {
+    var keyPastDiv = $("<div>");
+    keyPastDiv.addClass("col-lg-4 col-md-4 col-sm-4 " + keyArr[i]);
+    keyPastDiv.text("This is the " + keyArr[i]);
+    keyRow.append(keyPastDiv);
+    jumbo.append(keyRow);
+  };
 
   //add a click event for jumbotron
   jumbo.click(function () {
@@ -59,55 +71,42 @@ $(document).ready(function () {
         //Essentially grab what is in the nineToTen element and save it to workDayEvents object.
         saveUserInput($("#nineToTen"), "nineToTen");
         //style of if statement in code above is repeated below for every hour element.
-      } else if (event.target.id === "tenToElevenButton") {
-        console.log("10to11");
+      } 
+        else if (event.target.id === "tenToElevenButton") {
         saveUserInput($("#tenToEleven"), "tenToEleven");
-      } else if (event.target.id === "elevenToTwelveButton") {
-        console.log("11to12");
+      } 
+        else if (event.target.id === "elevenToTwelveButton") {
         saveUserInput($("#elevenToTwelve"), "elevenToTwelve");
-      } else if (event.target.id === "twelveToOneButton") {
-        console.log("12to1");
+      } 
+        else if (event.target.id === "twelveToOneButton") {
         saveUserInput($("#twelveToOne"), "twelveToOne");
-      } else if (event.target.id === "oneToTwoButton") {
-        console.log("1to2");
+      } 
+        else if (event.target.id === "oneToTwoButton") {
         saveUserInput($("#oneToTwo"), "oneToTwo");
-      } else if (event.target.id === "twoToThreeButton") {
-        console.log("2to3");
+      } 
+        else if (event.target.id === "twoToThreeButton") {
         saveUserInput($("#twoToThree"), "twoToThree");
-      } else if (event.target.id === "threeToFourButton") {
-        console.log("3to4");
+      } 
+        else if (event.target.id === "threeToFourButton") {
         saveUserInput($("#threeToFour"), "threeToFour");
-      } else if (event.target.id === "fourToFiveButton") {
-        console.log("4to5");
+      } 
+        else if (event.target.id === "fourToFiveButton") {
         saveUserInput($("#fourToFive"), "fourToFive");
+      } 
+        else if (event.target.id === "fivetoSixButton") {
+        console.log("5to6");
+        saveUserInput($("#fiveToSix"), "fiveToSix");
       }
+
       //This function takes the workDayEvents objects and saves it local storage
       storeEvents();
-      //this is a console.log of the workDayEvents object that is used for troubleshooting code
-      console.log(workDayEvents)
 
     }
-
   });
-
-  // //Debugging tools
-  // console.log($(".row"));
-  // console.log($("#nineToTen"));
-  // console.log($("textarea"));
-  // console.log(moment().format("HH"));
-  // console.log($("textarea")[0].dataset.hour);
-  // console.log($(".row").children()[0]);
-  // // $(".row").children()[0].append("9 AM");
-  // console.log($("<h4>"));
-  // console.log($("#hour_block"));
-  // console.log($("#nineToTen").parent().prev());
-  console.log(moment().format("HH"));
-  console.log(parseInt(moment().format("HH")));
-  console.log($("textarea")[0].dataset.hour);
 
   //Below code changes the class for each hour element based on the time of day.
   //This if statement checks to see if the time is after 5pm.  If so it removes the "present" & "future" css style classes and adds "past" to all textarea elements.
-  if (timeFormat >= 17) {
+  if (timeFormat >= 18) {
     $("textarea").removeClass("present").removeClass("future").addClass("past");
   }
   //This if statement checks to see if the time is before 9am.  If so it add all the css style "future" an removes "present" & "past" to all textarea elements.
@@ -115,7 +114,7 @@ $(document).ready(function () {
     $("textarea").removeClass("present").removeClass("past").addClass("future");
   }
   //This if statment checks to see if the time is between 9am and 5pm.
-  else if (9 >= timeFormat < 17) {
+  else if (9 >= timeFormat < 18) {
     //this line of code does a jquery selector for all textarea tags and returns them in an object.  
     $.each($("textarea"), function (index) {
 
@@ -150,9 +149,9 @@ function saveUserInput(hourElement, keyname) {
 
 };
 
-//this function stores the highscore in object scoresArr in localStorage
+//this function stores the workDayEvents object in localStorage
 function storeEvents() {
-  // Stringify and set "scoresArr" key in localStorage to scoresArr
+  // Stringify and set "workDayEvents" key in localStorage to workDayEvents
   localStorage.setItem("workDayEvents", JSON.stringify(workDayEvents));
 };
 
@@ -189,6 +188,8 @@ function init() {
       $("#threeToFour").text(value);
     } else if (key === "fourToFive") {
       $("#fourToFive").text(value);
+    } else if (key === "fivetoSix") {
+      $("#fiveToSix").text(value);
     }
   });
 
@@ -208,11 +209,13 @@ function createHourDivs(blockText, siblingChildId) {
 
 };
 
+//This function will clear the local storage and then refresh the page
 function clearLocalStorage() {
-
+  //this sets the workDayEvents object to empty
   workDayEvents = {};
 
   storeEvents();
+  //this function refreshes the page
   location.reload();
 };
 

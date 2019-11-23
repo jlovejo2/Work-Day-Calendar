@@ -2,6 +2,7 @@ var dateLocation = $("#currentDay");
 var workCalendar = $("#calendarArea");
 var jumbo = $(".jumbotron");
 var timeFormat = parseInt(moment().format("HH"));
+
 // var nineToTen = $("#nineToTen");
 // var tenToEleven = $("#tenToEleven");
 // var eleventoTwelve = $("#elevenToTwelve");
@@ -26,27 +27,25 @@ createHourDivs("2 PM", "#twoToThree");
 createHourDivs("3 PM", "#threeToFour");
 createHourDivs("4 PM", "#fourToFive");
 
-//Make the current date and time viewable at the top of the page in currentDay div.
-dateLocation.text(moment().format('LLLL'));
-
-//Create Clear Events Button
-var but = $("<button>");
- but.text("Clear Events");
-jumbo.append(but);
-but.addClass("btn btn-primary btm-sm");
-
-
 $(document).ready(function () {
 
+  //Make the current date and time viewable at the top of the page in currentDay div.
+  dateLocation.text(moment().format('LLLL'));
+
+  //Create Clear Events Button
+  var but = $("<button>");
+  but.text("Clear Events");
+  jumbo.append(but);
+  but.addClass("btn btn-primary btm-sm");
+
   //add a click event for jumbotron
-  jumbo.click(function() {
-    if(event.target.tagName === "BUTTON") {
+  jumbo.click(function () {
+    //if a button is clicked execute below code
+    if (event.target.tagName === "BUTTON") {
+      //this function sets the workDayEvents object to empty and stores it into local storage again and reloads the page.
       clearLocalStorage();
-      init();
     }
   })
-
-  
 
   // Start a click event on the entire calendar area ...
   $(workCalendar).click(function () {
@@ -119,12 +118,16 @@ $(document).ready(function () {
   else if (9 >= timeFormat < 17) {
     //this line of code does a jquery selector for all textarea tags and returns them in an object.  
     $.each($("textarea"), function (index) {
-      if (parseInt($("textarea")[index].dataset.hour) < timeFormat ) {
+
+      var dataHourValue = parseInt($("textarea")[index].dataset.hour)
+
+      if (dataHourValue < timeFormat) {
         $("textarea")[index].classList.value = "past";
-      } else if (parseInt($("textarea")[index].dataset.hour) === timeFormat) {
+      } else if (dataHourValue === timeFormat) {
         $("textarea")[index].classList.value = "present";
-      } else if (parseInt($("textarea")[index].dataset.hour) > timeFormat) {
+      } else if (dataHourValue > timeFormat) {
         $("textarea")[index].classList.value = "future";
+
       }
     });
   };
@@ -145,13 +148,13 @@ function saveUserInput(hourElement, keyname) {
   //Add new userText to workDayEvents object under keyname parameter specified in function
   workDayEvents[keyname] = userText;
 
-}
+};
 
 //this function stores the highscore in object scoresArr in localStorage
 function storeEvents() {
   // Stringify and set "scoresArr" key in localStorage to scoresArr
   localStorage.setItem("workDayEvents", JSON.stringify(workDayEvents));
-}
+};
 
 //This function runs the initial set=up for the page.  It gets the workDayEvents from localstorage and pulls the content into the appropriate hour locations
 function init() {
@@ -205,15 +208,13 @@ function createHourDivs(blockText, siblingChildId) {
 
 };
 
-
 function clearLocalStorage() {
-    
+
   workDayEvents = {};
 
-    storeEvents();
-    init();
-    location.reload();
-}
+  storeEvents();
+  location.reload();
+};
 
 
 

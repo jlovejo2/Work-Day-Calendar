@@ -1,5 +1,7 @@
 var dateLocation = $("#currentDay");
 var workCalendar = $("#calendarArea");
+var jumbo = $(".jumbotron");
+var timeFormat = parseInt(moment().format("HH"));
 // var nineToTen = $("#nineToTen");
 // var tenToEleven = $("#tenToEleven");
 // var eleventoTwelve = $("#elevenToTwelve");
@@ -27,8 +29,25 @@ createHourDivs("4 PM", "#fourToFive");
 //Make the current date and time viewable at the top of the page in currentDay div.
 dateLocation.text(moment().format('LLLL'));
 
+//Create Clear Events Button
+var but = $("<button>");
+ but.text("Clear Events");
+jumbo.append(but);
+but.addClass("btn btn-primary btm-sm");
+
 
 $(document).ready(function () {
+
+  //add a click event for jumbotron
+  jumbo.click(function() {
+    if(event.target.tagName === "BUTTON") {
+      clearLocalStorage();
+      init();
+    }
+  })
+
+  
+
   // Start a click event on the entire calendar area ...
   $(workCalendar).click(function () {
     // event.preventDefault();
@@ -69,38 +88,42 @@ $(document).ready(function () {
       console.log(workDayEvents)
 
     }
+
   });
 
-  //Debugging tools
-  console.log($(".row"));
-  console.log($("#nineToTen"));
-  console.log($("textarea"));
+  // //Debugging tools
+  // console.log($(".row"));
+  // console.log($("#nineToTen"));
+  // console.log($("textarea"));
+  // console.log(moment().format("HH"));
+  // console.log($("textarea")[0].dataset.hour);
+  // console.log($(".row").children()[0]);
+  // // $(".row").children()[0].append("9 AM");
+  // console.log($("<h4>"));
+  // console.log($("#hour_block"));
+  // console.log($("#nineToTen").parent().prev());
   console.log(moment().format("HH"));
+  console.log(parseInt(moment().format("HH")));
   console.log($("textarea")[0].dataset.hour);
-  console.log($(".row").children()[0]);
-  // $(".row").children()[0].append("9 AM");
-  console.log($("<h4>"));
-  console.log($("#hour_block"));
-  console.log($("#nineToTen").parent().prev());
 
   //Below code changes the class for each hour element based on the time of day.
   //This if statement checks to see if the time is after 5pm.  If so it removes the "present" & "future" css style classes and adds "past" to all textarea elements.
-  if (moment().format("HH") >= 17) {
+  if (timeFormat >= 17) {
     $("textarea").removeClass("present").removeClass("future").addClass("past");
   }
   //This if statement checks to see if the time is before 9am.  If so it add all the css style "future" an removes "present" & "past" to all textarea elements.
-  else if (moment().format("HH") < 9) {
+  else if (timeFormat < 9) {
     $("textarea").removeClass("present").removeClass("past").addClass("future");
   }
   //This if statment checks to see if the time is between 9am and 5pm.
-  else if (9 >= moment().format("HH") < 17) {
+  else if (9 >= timeFormat < 17) {
     //this line of code does a jquery selector for all textarea tags and returns them in an object.  
     $.each($("textarea"), function (index) {
-      if ($("textarea")[index].dataset.hour < moment().format("HH")) {
+      if (parseInt($("textarea")[index].dataset.hour) < timeFormat ) {
         $("textarea")[index].classList.value = "past";
-      } else if ($("textarea")[index].dataset.hour === moment().format("HH")) {
+      } else if (parseInt($("textarea")[index].dataset.hour) === timeFormat) {
         $("textarea")[index].classList.value = "present";
-      } else if ($("textarea")[index].dataset.hour > moment().format("HH")) {
+      } else if (parseInt($("textarea")[index].dataset.hour) > timeFormat) {
         $("textarea")[index].classList.value = "future";
       }
     });
@@ -149,7 +172,6 @@ function init() {
     //the associated elements content equal to the value associated with that keyname.  
     if (key === "nineToTen") {
       $("#nineToTen").text(value);
-
     } else if (key === "tenToEleven") {
       $("#tenToEleven").text(value);
     } else if (key === "elevenToTwelve") {
@@ -183,6 +205,15 @@ function createHourDivs(blockText, siblingChildId) {
 
 };
 
+
+function clearLocalStorage() {
+    
+  workDayEvents = {};
+
+    storeEvents();
+    init();
+    location.reload();
+}
 
 
 

@@ -2,7 +2,7 @@
 This Porfolio is being created as homework 4 assignment in my coding bootcamp with NorthWestern University. The goal is to add responsive to my webpage with boostrap and media queries.
 
 the link to my page is shown below:
-https://jlovejo2.github.io/Work_Day_Calendar/
+https://jlovejo2.github.io/Work-Day-Calendar/
 
 ## Table of Contents
 * [Work Day Calendar](#work-day-calendar)

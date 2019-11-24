@@ -31,12 +31,7 @@ $(document).ready(function () {
   //Make the current date and time viewable at the top of the page in currentDay div.
   dateLocation.text(moment().format('LLLL'));
 
-  //Create Clear Events Button
-  but.text("Clear Events");
-  jumbo.append(but);
-  but.addClass("btn btn-warning btm-sm");
-
-  //create keyDiv displaying color coding key 
+    //create keyDiv displaying color coding key 
   keyTitle.text("Color Coding Key");
   keyTitle.addClass("m-3");
   jumbo.append(keyTitle.append(keyRow));
@@ -49,6 +44,11 @@ $(document).ready(function () {
     keyRow.append(keyPastDiv);
     jumbo.append(keyRow);
   };
+
+  //Create Clear Events Button
+  but.text("Click to Clear All Events");
+  jumbo.append(but);
+  but.addClass("btn btn-success btm-sm");
 
   //add a click event for jumbotron
   jumbo.click(function () {

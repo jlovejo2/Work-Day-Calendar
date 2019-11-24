@@ -19,7 +19,7 @@ init();
 createHourDivs("9 AM", "#nineToTen");
 createHourDivs("10 AM", "#tenToEleven");
 createHourDivs("11 AM", "#elevenToTwelve");
-createHourDivs("12 AM", "#twelveToOne");
+createHourDivs("12 PM", "#twelveToOne");
 createHourDivs("1 PM", "#oneToTwo");
 createHourDivs("2 PM", "#twoToThree");
 createHourDivs("3 PM", "#threeToFour");
